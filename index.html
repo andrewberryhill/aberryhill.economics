@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name – Economist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS — RMC Forest Green + Vegas Gold ────────────── */
+    :root {
+      --ink:        #1a1a1a;
+      --muted:      #5a5e58;
+      --rule:       #c8d4c4;        /* faint green-grey rule */
+      --bg:         #f7f9f6;        /* barely-there sage tint */
+      --accent:     #0e572d;        /* RMC Forest Green */
+      --accent-mid: #416131;        /* RMC secondary green */
+      --gold:       #806f3f;        /* RMC Vegas Gold */
+      --gold-light: #bfb290;        /* RMC light gold */
+      --link:       #0e572d;        /* green links, not blue */
+      --max:        860px;
+      --serif:      'EB Garamond', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────── */
+    .site-wrapper {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ─── TOP NAV ────────────────────────────────────────────── */
+    header {
+      padding: 36px 0 24px;
+      border-bottom: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .site-name {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .site-name:hover { text-decoration: none; }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    nav a { color: var(--muted); }
+    nav a:hover { color: var(--accent); text-decoration: none; }
+    nav a.active {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 2px;
+    }
+
+    /* ─── HERO / HOME ────────────────────────────────────────── */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 56px;
+      padding: 56px 0 60px;
+      align-items: start;
+    }
+
+    .home-bio h1 {
+      font-family: var(--serif);
+      font-size: 2.15rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .home-bio .title-line {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .home-bio p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 16px;
+      max-width: 560px;
+    }
+
+    .contact-block {
+      margin-top: 28px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-block a { color: var(--link); }
+
+    .cv-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 9px 22px;
+      border: 1.5px solid var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: var(--sans);
+      transition: background 0.18s, color 0.18s;
+    }
+    .cv-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .headshot {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+      filter: grayscale(8%);
+      border: 1px solid var(--rule);
+    }
+    .headshot-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #e8e4de;
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ─── SECTION DIVIDER ────────────────────────────────────── */
+    .section-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0;
+    }
+
+    /* ─── FIELDS & REFS ──────────────────────────────────────── */
+    .fields-refs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .meta-section h2 {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .meta-section p {
+      font-size: 0.94rem;
+      color: var(--ink);
+    }
+
+    .refs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ref-item strong {
+      display: block;
+      font-size: 0.94rem;
+      font-weight: 500;
+    }
+    .ref-item span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .ref-item a { font-size: 0.82rem; color: var(--link); }
+
+    /* ─── RESEARCH PAGE ──────────────────────────────────────── */
+    .page-title {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 500;
+      padding: 44px 0 32px;
+      border-bottom: 1px solid var(--rule);
+      border-left: 4px solid var(--gold);
+      padding-left: 16px;
+    }
+
+    .paper-section {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .paper-section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .paper {
+      margin-bottom: 32px;
+    }
+    .paper:last-child { margin-bottom: 0; }
+
+    .paper-title {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+    .paper-title a { color: var(--ink); }
+    .paper-title a:hover { color: var(--link); }
+
+    .paper-meta {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .paper-abstract {
+      font-size: 0.92rem;
+      color: #3a3a3a;
+      max-width: 680px;
+    }
+
+    .paper-links {
+      margin-top: 8px;
+      display: flex;
+      gap: 16px;
+      font-size: 0.8rem;
+    }
+    .paper-links a {
+      color: var(--link);
+      border-bottom: 1px solid transparent;
+    }
+    .paper-links a:hover {
+      text-decoration: none;
+      border-bottom-color: var(--link);
+    }
+
+    /* ─── TEACHING PAGE ──────────────────────────────────────── */
+    .teaching-list {
+      padding: 36px 0;
+    }
+
+    .teaching-item {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+
+    .teaching-item:first-child { border-top: 1px solid var(--rule); }
+
+    .teaching-name {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+    .teaching-role {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .teaching-year {
+      font-size: 0.83rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ─── BIO/CV PAGE ────────────────────────────────────────── */
+    .bio-block {
+      padding: 44px 0;
+      max-width: 640px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .bio-block p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 14px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      padding: 32px 0 40px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-top: 2px solid var(--gold-light);
+    }
+
+    /* ─── PAGE SWITCHER (demo only) ──────────────────────────── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 620px) {
+      .home-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .home-grid .headshot-placeholder,
+      .home-grid img {
+        max-width: 180px;
+      }
+      .fields-refs {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      nav { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="site-wrapper">
+
+  <!-- ── HEADER / NAV ──────────────────────────────────────── -->
+  <header>
+    <a href="#" class="site-name" onclick="showPage('home')">Your Name</a>
+    <nav>
+      <a href="#" onclick="showPage('home')" class="active" id="nav-home">About</a>
+      <a href="#" onclick="showPage('research')" id="nav-research">Research</a>
+      <a href="#" onclick="showPage('teaching')" id="nav-teaching">Teaching</a>
+      <a href="#" onclick="showPage('bio')" id="nav-bio">CV</a>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: HOME / ABOUT
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page active" id="page-home">
+
+    <div class="home-grid">
+      <div class="home-bio">
+        <h1>Your Name</h1>
+        <p class="title-line">Assistant Professor of Economics · Your Institution</p>
+
+        <p>
+          Welcome! I am an Assistant Professor of Economics at [Your Institution].
+          My research focuses on [your research fields, e.g., monetary economics,
+          banking, and economic history].
+        </p>
+        <p>
+          I received my Ph.D. in Economics from [Your Graduate Institution].
+          Before joining [Your Institution], I was [prior position if applicable].
+        </p>
+        <p>
+          My work has been published in / is under review at [journals or conferences].
+          I am also an active teacher, currently offering courses in
+          [e.g., Money and Banking, Intermediate Macroeconomics, and Economic History].
+        </p>
+
+        <div class="contact-block">
+          <span>📍 [Department], [Institution] · [City, State]</span>
+          <span>✉ <a href="mailto:you@yourinstitution.edu">you@yourinstitution.edu</a></span>
+        </div>
+
+        <a href="cv.pdf" class="cv-btn" target="_blank">Download CV</a>
+      </div>
+
+      <div>
+        <!-- Replace src with your actual headshot path -->
+        <div class="headshot-placeholder">
+          Photo<br>Here
+        </div>
+        <!-- Uncomment when you have a photo:
+        <img src="headshot.jpg" alt="Your Name" class="headshot" />
+        -->
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <div class="fields-refs">
+      <div class="meta-section">
+        <h2>Research &amp; Teaching Fields</h2>
+        <p>[Primary Field], [Secondary Field]<br>[Tertiary Field if applicable]</p>
+      </div>
+
+      <div class="meta-section">
+        <h2>References</h2>
+        <div class="refs-list">
+          <div class="ref-item">
+            <strong>Reference One</strong>
+            <span>[Title, Institution]</span>
+            <a href="mailto:ref1@institution.edu">ref1@institution.edu</a>
+          </div>
+          <div class="ref-item">
+            <strong>Reference Two</strong>
+            <span>[Title, Institution]</span>
+            <a href="mailto:ref2@institution.edu">ref2@institution.edu</a>
+          </div>
+          <div class="ref-item">
+            <strong>Reference Three</strong>
+            <span>[Title, Institution]</span>
+            <a href="mailto:ref3@institution.edu">ref3@institution.edu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-home -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: RESEARCH
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="page-research">
+
+    <h1 class="page-title">Research</h1>
+
+    <!-- Working Papers -->
+    <div class="paper-section">
+      <p class="paper-section-label">Working Papers</p>
+
+      <div class="paper">
+        <p class="paper-title">
+          <a href="#">Title of Your Job Market Paper or Lead Working Paper</a>
+        </p>
+        <p class="paper-meta">With Co-Author Name (Institution) · [Year]</p>
+        <p class="paper-abstract">
+          Abstract: Describe your paper's main question, method, and findings here.
+          Keep this to 3–5 sentences. Readers should understand the contribution
+          and significance without needing to open the PDF.
+        </p>
+        <div class="paper-links">
+          <a href="#">Paper (PDF)</a>
+          <a href="#">SSRN</a>
+          <a href="#">Slides</a>
+        </div>
+      </div>
+
+      <div class="paper">
+        <p class="paper-title">
+          <a href="#">Title of Second Working Paper</a>
+        </p>
+        <p class="paper-meta">Solo authored · [Year]</p>
+        <p class="paper-abstract">
+          Abstract: Brief description of the paper's central argument and contribution.
+        </p>
+        <div class="paper-links">
+          <a href="#">Paper (PDF)</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publications -->
+    <div class="paper-section">
+      <p class="paper-section-label">Publications</p>
+
+      <div class="paper">
+        <p class="paper-title">
+          <a href="#">Title of Published Paper</a>
+        </p>
+        <p class="paper-meta">
+          <em>Journal Name</em>, Vol. XX, No. X (Year), pp. XXX–XXX.
+          With Co-Author Name.
+        </p>
+        <p class="paper-abstract">
+          Brief summary of the paper. You can include the abstract or a shorter
+          description for published work.
+        </p>
+        <div class="paper-links">
+          <a href="#">Published Version</a>
+          <a href="#">Working Paper</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Works in Progress -->
+    <div class="paper-section">
+      <p class="paper-section-label">Works in Progress</p>
+
+      <div class="paper">
+        <p class="paper-title">Title of Work in Progress</p>
+        <p class="paper-meta">With Co-Author Name · In progress</p>
+        <p class="paper-abstract">Brief description of the project.</p>
+      </div>
+
+    </div>
+
+  </div><!-- /page-research -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: TEACHING
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="page-teaching">
+
+    <h1 class="page-title">Teaching</h1>
+
+    <div class="teaching-list">
+
+      <div class="teaching-item">
+        <div>
+          <div class="teaching-name">Money and Banking</div>
+          <div class="teaching-role">Instructor of Record · [Your Institution]</div>
+        </div>
+        <div class="teaching-year">Fall / Spring</div>
+      </div>
+
+      <div class="teaching-item">
+        <div>
+          <div class="teaching-name">Intermediate Macroeconomics</div>
+          <div class="teaching-role">Instructor of Record · [Your Institution]</div>
+        </div>
+        <div class="teaching-year">Fall</div>
+      </div>
+
+      <div class="teaching-item">
+        <div>
+          <div class="teaching-name">Intermediate Microeconomics</div>
+          <div class="teaching-role">Instructor of Record · [Your Institution]</div>
+        </div>
+        <div class="teaching-year">Spring</div>
+      </div>
+
+      <div class="teaching-item">
+        <div>
+          <div class="teaching-name">American Economic History</div>
+          <div class="teaching-role">Instructor of Record · [Your Institution]</div>
+        </div>
+        <div class="teaching-year">Spring</div>
+      </div>
+
+      <div class="teaching-item">
+        <div>
+          <div class="teaching-name">Principles of Economics</div>
+          <div class="teaching-role">Instructor of Record · [Your Institution]</div>
+        </div>
+        <div class="teaching-year">Fall / Spring</div>
+      </div>
+
+      <div class="teaching-item">
+        <div>
+          <div class="teaching-name">Data Analysis for Economics and Business</div>
+          <div class="teaching-role">Instructor of Record · [Your Institution] (new)</div>
+        </div>
+        <div class="teaching-year">Fall 2026</div>
+      </div>
+
+    </div>
+
+  </div><!-- /page-teaching -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       PAGE: BIO / CV
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page" id="page-bio">
+
+    <h1 class="page-title">Bio &amp; CV</h1>
+
+    <div class="bio-block">
+      <p>
+        I am an Assistant Professor of Economics at [Your Institution] in [City, State].
+        My research lies at the intersection of [Field 1] and [Field 2], with a particular
+        focus on [specific themes].
+      </p>
+      <p>
+        Before joining [Your Institution], I completed my Ph.D. in Economics at
+        [Graduate Institution] in [Year], where I was advised by [Advisor Name].
+        I also hold a [B.A./B.S.] in Economics from [Undergraduate Institution].
+      </p>
+      <p>
+        My work has been presented at [conference/workshop names] and has been
+        supported by [grants or fellowships if applicable].
+      </p>
+      <p>
+        Outside of research and teaching, I [brief personal note if desired, e.g.,
+        coach high school golf and am actively involved in the Billings, Montana community].
+      </p>
+
+      <a href="cv.pdf" class="cv-btn" target="_blank" style="margin-top:28px;">
+        Download Full CV (PDF)
+      </a>
+    </div>
+
+  </div><!-- /page-bio -->
+
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <span>© 2026 Your Name</span>
+    <span>[Department] · [Institution] · [City, State]</span>
+  </footer>
+
+</div><!-- /site-wrapper -->
+
+<!-- ── PAGE SWITCHER SCRIPT ──────────────────────────────── -->
+<script>
+  const pages = ['home','research','teaching','bio'];
+
+  function showPage(id) {
+    pages.forEach(p => {
+      document.getElementById('page-' + p).classList.toggle('active', p === id);
+      const nav = document.getElementById('nav-' + p);
+      if (nav) nav.classList.toggle('active', p === id);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // Allow nav links without page reload
+  document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', e => e.preventDefault());
+  });
+</script>
+
+</body>
+</html>
